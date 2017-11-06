@@ -4,7 +4,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const outputPath = path.resolve(__dirname, 'dist');
-const { CheckerPlugin } = require('awesome-typescript-loader');
+// const { CheckerPlugin } = require('awesome-typescript-loader');
 // const ManifestPlugin = require('webpack-manifest-plugin');
 // const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -32,7 +32,11 @@ module.exports = {
                 // }
             },
             //.ts .tsx
-            {test: /\.tsx?$/, loader: "babel-loader!awesome-typescript-loader"},
+            {
+                test: /\.tsx?$/, 
+                loader: "babel-loader!awesome-typescript-loader",
+                exclude: /(node_modules)/
+            },
             {
                 // test: /imgMatch(\/|\\)css\1.+\.css$/,
                 test: /\.css$/,
@@ -123,11 +127,8 @@ module.exports = {
         ]
     },
     entry: {
-        'document-check-list': 'documentCheck/ListApp.js',
-        'document-check-audit': 'documentCheck/AuditApp.js',
-        'img-match-list': 'imgMatch/DocListApp.js',
-        'img-match-audit': 'imgMatch/AuditApp.js',
-        vendor: ['react', 'react-dom', 'NavigatorApp', 'css/main.css']
+        bundle: 'App.tsx',
+        vendor: ['react', 'react-dom']
     },
     output: {
         filename: '[name].js',
@@ -135,7 +136,7 @@ module.exports = {
         // chunkFilename: '[name].[chunkhash].js',
         path: outputPath
     },
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     plugins: [
         new webpack.DefinePlugin({
             __Env: {
@@ -146,7 +147,7 @@ module.exports = {
             }
         }),
         // new CleanWebpackPlugin([outputPath]),
-        new webpack.optimize.ModuleConcatenationPlugin(),
+        // new webpack.optimize.ModuleConcatenationPlugin(),
         //https://github.com/danethurber/webpack-manifest-plugin
         // new ManifestPlugin(),
         //https://doc.webpack-china.org/plugins/named-modules-plugin
@@ -154,7 +155,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor']
         }),
-        new CheckerPlugin()
+        // new CheckerPlugin()
         //https://doc.webpack-china.org/guides/caching/#-extracting-boilerplate-
         //注意，引入顺序在这里很重要。CommonsChunkPlugin 的 'vendor' 实例，必须在 'runtime' 实例之前引入
         // new webpack.optimize.CommonsChunkPlugin({

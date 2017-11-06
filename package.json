@@ -6,10 +6,12 @@
     "prod": "webpack --config webpack.prod.js --display-modules --colors --progress --watch",
     "dev": "webpack --config webpack.dev.js --display-modules --colors --progress --watch"
   },
-  "keywords": [],
+  "çywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/react": "^16.0.19",
+    "@types/react-dom": "^16.0.2",
     "autoprefixer": "^7.1.6",
     "awesome-typescript-loader": "^3.2.3",
     "babel-cli": "^6.26.0",
@@ -33,7 +35,7 @@
     "sass-loader": "^6.0.6",
     "script-loader": "^0.7.0",
     "style-loader": "^0.18.2",
-    "typescript": "^2.5.3",
+    "typescript": "^2.6.1",
     "url-loader": "^0.5.9",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.6.1",
